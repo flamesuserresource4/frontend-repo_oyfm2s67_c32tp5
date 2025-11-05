@@ -1,67 +1,85 @@
-import Spline from "@splinetool/react-spline";
-import { Sparkles, Rocket, ShieldCheck } from "lucide-react";
-import { motion } from "framer-motion";
+import React from 'react';
+import Spline from '@splinetool/react-spline';
+import { motion } from 'framer-motion';
+import { Rocket, Sparkles } from 'lucide-react';
+
+const titleVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const buttonVariants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: (i) => ({ opacity: 1, y: 0, transition: { delay: 0.2 + i * 0.1, type: 'spring', stiffness: 180, damping: 18 } }),
+};
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-[92vh] w-full overflow-hidden bg-black">
+    <section className="relative h-[82vh] w-full overflow-hidden">
+      {/* 3D Spline scene - keep it fully interactive */}
       <div className="absolute inset-0">
-        <Spline
-          scene="https://prod.spline.design/EF7JOSsHLk16Tlw9/scene.splinecode"
-          style={{ width: "100%", height: "100%" }}
+        <Spline scene="https://prod.spline.design/EF7JOSsHLk16Tlw9/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+      </div>
+
+      {/* Animated gradient atmospherics (do not block pointer events) */}
+      <div className="pointer-events-none absolute inset-0">
+        <motion.div
+          className="absolute -top-32 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-fuchsia-600/20 blur-3xl"
+          animate={{ opacity: [0.15, 0.35, 0.15], scale: [1, 1.15, 1] }}
+          transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-indigo-600/20 blur-3xl"
+          animate={{ opacity: [0.1, 0.3, 0.1], scale: [1, 1.08, 1] }}
+          transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}
         />
       </div>
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-black/55 to-black/90" />
-
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-28 pb-20 text-white">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl"
+      {/* Content overlay */}
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-center justify-center px-6 text-center">
+        <motion.h1
+          variants={titleVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="text-balance bg-gradient-to-b from-white via-white to-fuchsia-200/90 bg-clip-text text-4xl font-semibold tracking-tight text-transparent sm:text-5xl md:text-6xl"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
-            <ShieldCheck className="h-3.5 w-3.5 text-indigo-300" />
-            <span>Product-focused • Full‑stack • AI Experiences</span>
-          </div>
-          <h1 className="mt-6 text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
-            Elegant software, real outcomes.
-          </h1>
-          <p className="mt-5 text-base sm:text-lg text-white/70 leading-relaxed">
-            I build production-grade web products with 3D presence and AI features. Crisp design, reliable
-            engineering, and measurable impact—crafted for teams and investors who expect polish.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Badge label="AI Interfaces" />
-            <Badge label="Full‑stack Delivery" />
-            <Badge label="Design Systems" />
-          </div>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href="#projects"
-              className="pointer-events-auto inline-flex items-center justify-center rounded-md bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-3 text-sm font-semibold shadow-lg shadow-indigo-700/20 hover:scale-[1.02] transition"
-            >
-              <Rocket className="mr-2 h-4 w-4" /> View Work
-            </a>
-            <a
-              href="#assistant"
-              className="pointer-events-auto inline-flex items-center justify-center rounded-md border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold hover:bg-white/10 transition"
-            >
-              Ask the AI Assistant
-            </a>
-          </div>
-        </motion.div>
+          Futuristic Portfolio Studio
+        </motion.h1>
+        <motion.p
+          variants={titleVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.15 }}
+          className="mt-4 max-w-2xl text-pretty text-base text-zinc-300 sm:text-lg"
+        >
+          Dark, cybernetic, 3D-animated. Built for showcasing projects, writing, and case studies — powered by an AI assistant.
+        </motion.p>
+
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <motion.a
+            custom={0}
+            variants={buttonVariants}
+            initial="hidden"
+            animate="visible"
+            href="#studio"
+            className="group inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-3 text-sm font-medium text-white backdrop-blur transition hover:bg-white/20"
+          >
+            <Sparkles className="h-4 w-4 text-fuchsia-300 transition group-hover:rotate-12" /> Explore the Studio
+          </motion.a>
+
+          <motion.a
+            custom={1}
+            variants={buttonVariants}
+            initial="hidden"
+            animate="visible"
+            href="#admin"
+            className="group inline-flex items-center gap-2 rounded-full bg-fuchsia-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-fuchsia-600/30 transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-fuchsia-400/60"
+          >
+            <Rocket className="h-4 w-4" /> Admin Area
+          </motion.a>
+        </div>
       </div>
     </section>
-  );
-}
-
-function Badge({ label }) {
-  return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-3 py-1 text-xs text-white/80">
-      <Sparkles className="h-3.5 w-3.5 text-indigo-300" />
-      {label}
-    </span>
   );
 }
