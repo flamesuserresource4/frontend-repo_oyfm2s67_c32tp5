@@ -1,0 +1,63 @@
+
+> vibe-generated-app@1.0.0 dev
+> vite
+
+
+  VITE v5.4.20  ready in 266 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://172.20.31.104:3000/
+✘ [ERROR] Failed to resolve entry for package "react-merge-refs". The package may have incorrect main/module/exports specified in its package.json. [plugin vite:dep-pre-bundle]
+
+    node_modules/esbuild/lib/main.js:1225:21:
+      1225 │         let result = await callback({
+           ╵                      ^
+
+    at packageEntryFailure (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46638:15)
+    at resolvePackageEntry (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46635:3)
+    at tryNodeResolve (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46451:16)
+    at ResolveIdContext.resolveId (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46201:19)
+    at PluginContainer.resolveId (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49018:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:66541:15
+    at async file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46952:28
+    at async requestCallbacks.on-resolve (/home/workspace/node_modules/esbuild/lib/main.js:1225:22)
+    at async handleRequest (/home/workspace/node_modules/esbuild/lib/main.js:647:11)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/esbuild/lib/main.js:1150:20:
+      1150 │       let promise = setup({
+           ╵                     ^
+
+    at setup (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46935:13)
+    at handlePlugins (/home/workspace/node_modules/esbuild/lib/main.js:1150:21)
+    at buildOrContextImpl (/home/workspace/node_modules/esbuild/lib/main.js:873:5)
+    at Object.buildOrContext (/home/workspace/node_modules/esbuild/lib/main.js:699:5)
+    at /home/workspace/node_modules/esbuild/lib/main.js:2032:68
+    at new Promise (<anonymous>)
+    at Object.context (/home/workspace/node_modules/esbuild/lib/main.js:2032:27)
+    at Object.context (/home/workspace/node_modules/esbuild/lib/main.js:1874:58)
+    at prepareEsbuildOptimizerRun (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:50927:33)
+
+  The plugin "vite:dep-pre-bundle" was triggered by this import
+
+    node_modules/@splinetool/react-spline/dist/ParentSize.js:5:31:
+      5 │ import { mergeRefs as E } from "react-merge-refs";
+        ╵                                ~~~~~~~~~~~~~~~~~~
+
+/home/workspace/node_modules/esbuild/lib/main.js:1472
+  let error = new Error(text);
+              ^
+
+Error: Build failed with 1 error:
+node_modules/esbuild/lib/main.js:1225:21: ERROR: [plugin: vite:dep-pre-bundle] Failed to resolve entry for package "react-merge-refs". The package may have incorrect main/module/exports specified in its package.json.
+    at failureErrorWithLog (/home/workspace/node_modules/esbuild/lib/main.js:1472:15)
+    at /home/workspace/node_modules/esbuild/lib/main.js:945:25
+    at /home/workspace/node_modules/esbuild/lib/main.js:1353:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  errors: [Getter/Setter],
+  warnings: [Getter/Setter]
+}
+
+Node.js v24.8.0
